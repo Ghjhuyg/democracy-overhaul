@@ -47,14 +47,10 @@ async def redis_subscriber():
                 data = json.loads(message['data'])
                 event_type = data.get('type')
                 
-                # Для события 'vote' можно запросить обновлённые голоса для этого законопроекта
                 if event_type == 'vote':
                     bill_id = data.get('bill_id')
-                    # Можно сделать запрос в БД и отправить обновлённые данные голосования
-                    # Но для простоты пересылаем как есть
                     await manager.broadcast(json.dumps(data))
                 else:
-                    # Для других событий просто пересылаем
                     await manager.broadcast(json.dumps(data))
         except Exception as e:
             print(f"Redis subscriber error: {e}")
@@ -70,7 +66,6 @@ async def lifespan(app: FastAPI):
 # ---------- Создание приложения ----------
 app = FastAPI(title="Democracy Overhaul API", version="1.0", lifespan=lifespan)
 
-# Подключаем роутеры
 app.include_router(bills.router)
 app.include_router(auth_router)
 

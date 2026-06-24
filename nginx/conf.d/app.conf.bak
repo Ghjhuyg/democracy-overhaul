@@ -1,9 +1,11 @@
+# HTTP → HTTPS редирект для основного домена
 server {
     listen 80;
     server_name democracy-overhaul.bagaev.ai-info.ru;
     return 301 https://$server_name$request_uri;
 }
 
+# HTTPS сервер для основного домена
 server {
     listen 443 ssl http2;
     server_name democracy-overhaul.bagaev.ai-info.ru;
@@ -11,7 +13,7 @@ server {
     ssl_certificate /etc/nginx/certs/app.crt;
     ssl_certificate_key /etc/nginx/certs/app.key;
 
-    root /var/www/html/public;
+    root /var/www/democracy-overhaul/public;
     index index.php;
 
     location / {
@@ -20,7 +22,7 @@ server {
 
     location ~ \.php$ {
         fastcgi_split_path_info ^(.+\.php)(/.+)$;
-        fastcgi_pass laravel:9000;
+        fastcgi_pass php:9000;                 # имя сервиса Laravel в docker-compose
         fastcgi_index index.php;
         include fastcgi_params;
         fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
