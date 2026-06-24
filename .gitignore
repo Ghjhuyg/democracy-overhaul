@@ -1,0 +1,36 @@
+# IDE
+.idea/
+.vscode/
+
+# Docker
+.env
+
+# Laravel
+laravel/vendor/
+laravel/node_modules/
+laravel/storage/*.log
+laravel/storage/framework/cache/*
+laravel/storage/framework/sessions/*
+laravel/storage/framework/views/*
+laravel/bootstrap/cache/*.php
+laravel/.env
+laravel/public/build/
+laravel/public/hot
+laravel/public/css/*.css
+laravel/public/js/*.js
+
+# FastAPI
+fastapi/venv/
+fastapi/__pycache__/
+fastapi/*.pyc
+fastapi/.env
+fastapi/.pytest_cache/
+
+# Nginx
+nginx/certs/*.crt
+nginx/certs/*.key
+nginx/logs/
+
+# Общее
+.DS_Store
+Thumbs.db
